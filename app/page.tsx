@@ -1,65 +1,82 @@
-import Image from "next/image";
+import TopBar from '@/components/TopBar';
+import DialRow from '@/components/DialRow';
+import ViewfinderHUD from '@/components/ViewfinderHUD';
+import CameraPreviewLoader from '@/components/CameraPreviewLoader';
+import ScenePicker from '@/components/ScenePicker';
+import SeoContent from '@/components/SeoContent';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      {/* ── Camera widget ── */}
+      <div className="camera-shell">
+        <main className="camera-body">
+          <TopBar />
+
+          {/* Viewfinder shell */}
+          <div style={{
+            flex: 1,
+            padding: 6,
+            background: '#0d0d0d',
+            position: 'relative',
+            boxShadow: 'inset 0 0 0 1px #2a2a2a, inset 0 0 0 2px #111, 0 4px 20px rgba(0,0,0,0.9)',
+            borderRadius: 4,
+            margin: '0 4px',
+            minHeight: 0,
+          }}>
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              borderRadius: 2,
+              overflow: 'hidden',
+              border: '1px solid #0a0a0a',
+              boxShadow: 'inset 0 0 40px rgba(0,0,0,0.6)',
+            }}>
+              {/* Corner brackets */}
+              <div style={{
+                position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10,
+                backgroundImage: `
+                  linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to left, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to top, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to left, rgba(255,255,255,0.15) 1px, transparent 1px),
+                  linear-gradient(to top, rgba(255,255,255,0.15) 1px, transparent 1px)
+                `,
+                backgroundSize: '12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px',
+                backgroundPosition: '8px 8px, 8px 8px, right 8px top 8px, right 8px top 8px, 8px bottom 8px, 8px bottom 8px, right 8px bottom 8px, right 8px bottom 8px',
+                backgroundRepeat: 'no-repeat',
+              }} />
+
+              <CameraPreviewLoader />
+              <ViewfinderHUD />
+            </div>
+          </div>
+
+          {/* Scene picker */}
+          <ScenePicker />
+
+          {/* Control deck */}
+          <div style={{
+            backgroundImage: `
+              repeating-linear-gradient(180deg, transparent 0px, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 3px),
+              var(--brushed-h)
+            `,
+            borderTop: '1px solid #2e2e2e',
+            boxShadow: '0 -2px 8px rgba(0,0,0,0.8)',
+            paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+            flexShrink: 0,
+          }}>
+            <DialRow />
+          </div>
+        </main>
+      </div>
+
+      {/* ── SEO content (desktop only, below the camera) ── */}
+      <SeoContent />
+    </>
   );
 }

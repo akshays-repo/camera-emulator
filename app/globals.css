@@ -1,26 +1,238 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Oswald:wght@400;600&display=swap');
 
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --body-base:        #111111;
+  --body-raised:      #1c1c1c;
+  --body-grip:        #0d0d0d;
+  --body-chrome:      #3a3a3a;
+  --metal-dark:       #1a1a1a;
+  --metal-mid:        #242424;
+  --metal-light:      #2e2e2e;
+  --metal-shine:      #404040;
+  --metal-shadow:     #0a0a0a;
+  --brushed-h: linear-gradient(
+    180deg,
+    #1e1e1e 0%, #2a2a2a 20%,
+    #1f1f1f 40%, #262626 60%,
+    #1c1c1c 80%, #222222 100%
+  );
+  --brushed-v: linear-gradient(
+    90deg,
+    #181818 0%, #2c2c2c 30%,
+    #1e1e1e 50%, #282828 70%,
+    #1a1a1a 100%
+  );
+  --engrave-shadow:   #0a0a0a;
+  --engrave-shine:    #3a3a3a;
+  --accent:           #e8a020;
+  --accent-dim:       #7a4a00;
+  --accent-glow:      rgba(232, 160, 32, 0.15);
+  --lcd-bg:           #0a0f0a;
+  --lcd-text:         #a8ff60;
+  --lcd-dim:          #3a6020;
+  --warning:          #cc2200;
+  --bezel-outer:      #141414;
+  --bezel-inner:      #0a0a0a;
+  --bezel-chrome:     #2a2a2a;
+  --bg-primary:       #0d0d0d;
+  --font-ui:          'Rajdhani', sans-serif;
+  --font-mono:        'Share Tech Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Mobile default: full-screen app ─────────────────────────────────────── */
+body {
+  background: #080808;
+  color: #e5e5e5;
+  font-family: var(--font-ui);
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.camera-shell {
+  width: 100vw;
+  height: 100dvh;
+}
+
+.camera-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #111111;
+  overflow: hidden;
+}
+
+/* ── Desktop: centered card + scrollable content ──────────────────────────── */
+@media (min-width: 640px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px 80px;
+    background: #060606;
+  }
+
+  .camera-shell {
+    width: 440px;
+    height: 760px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px #1e1e1e,
+      0 0 0 3px #080808,
+      0 32px 100px rgba(0,0,0,0.95),
+      0 8px 24px rgba(0,0,0,0.7);
+  }
+
+  .camera-body {
+    height: 760px;
+    border-radius: 20px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── SEO article below the camera ─────────────────────────────────────────── */
+.seo-section {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .seo-section {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    margin-top: 72px;
+  }
+
+  .seo-section h1 {
+    font-family: var(--font-ui);
+    font-size: 24px;
+    font-weight: 700;
+    color: #e0e0e0;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .seo-lead {
+    font-size: 14px;
+    color: #666;
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    margin-bottom: 52px;
+    border-left: 2px solid #1a1a1a;
+    padding-left: 16px;
+  }
+
+  .seo-h2 {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    margin-top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .seo-h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #181818;
+  }
+
+  .seo-p {
+    font-size: 13.5px;
+    color: #888;
+    font-family: 'Georgia', serif;
+    line-height: 1.82;
+    margin-bottom: 12px;
+  }
+
+  .seo-p strong {
+    color: #ccc;
+    font-style: normal;
+  }
+
+  .seo-example {
+    background: #0a0a0a;
+    border: 1px solid #161616;
+    border-left: 3px solid #252525;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 18px 0 28px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #555;
+    line-height: 2;
+  }
+
+  .seo-label { color: var(--accent); display: inline-block; width: 120px; }
+  .seo-val   { color: #6a9bba; }
+  .seo-note  { color: #444; font-size: 10px; }
+
+  .seo-triangle {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 24px 0 40px;
+  }
+
+  .seo-tri-card {
+    background: #0a0a0a;
+    border: 1px solid #181818;
+    border-radius: 6px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+
+  .seo-tri-icon { font-size: 24px; display: block; margin-bottom: 8px; }
+  .seo-tri-name {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    color: #ccc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .seo-tri-desc {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .seo-footer {
+    margin-top: 64px;
+    border-top: 1px solid #111;
+    padding-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: #2a2a2a;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes rec-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1.0; }
+}
+
+@keyframes lcd-flash {
+  0%   { color: #a8ff60; }
+  40%  { color: #e8a020; }
+  100% { color: #a8ff60; }
 }

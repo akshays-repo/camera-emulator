@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
-const SITE_URL = 'https://camerasimulator.app';
+const SITE_URL = 'https://camerasimulator.online';
 const TITLE    = 'Camera Simulator — Learn ISO, Aperture & Shutter Speed';
 const DESC     = 'Free interactive camera simulator. Adjust ISO, aperture, and shutter speed in real-time across 5 animated scenes. See exactly how each setting changes your photo — perfect for beginner and intermediate photographers.';
 const OG_IMG   = `${SITE_URL}/og-image.png`;

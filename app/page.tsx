@@ -9,6 +9,7 @@ export default function Home() {
       <header className="landing-header">
         <div className="landing-logo-mark">&#9679;</div>
         <span className="landing-logo-text">CAMERA SIM</span>
+        <Link href="/blog" className="landing-blog-link">Blog</Link>
       </header>
 
       <main className="landing-hero">

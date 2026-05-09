@@ -4,8 +4,8 @@ import TopBar from '@/components/TopBar';
 export const metadata: Metadata = {
   title: 'Camera Emulator',
   description: 'Interactive DSLR camera emulator. Adjust ISO, aperture, and shutter speed across 5 animated scenes and see real photographic results in real time.',
-  alternates: { canonical: 'https://camerasimulator.app/emulator' },
-  openGraph: { url: 'https://camerasimulator.app/emulator' },
+  alternates: { canonical: 'https://camerasimulator.online/emulator/' },
+  openGraph: { url: 'https://camerasimulator.online/emulator/' },
 };
 import DialRow from '@/components/DialRow';
 import ViewfinderHUD from '@/components/ViewfinderHUD';

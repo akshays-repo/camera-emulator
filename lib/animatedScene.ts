@@ -749,7 +749,7 @@ function paintCityBg(ctx: CanvasRenderingContext2D, W: number, H: number) {
       ctx.lineTo(bx + bw / 2, by - H * 0.05);
       ctx.stroke();
       // Blinking light
-      const blink = Math.sin(t * 3 + bi) > 0;
+      const blink = Math.sin(Date.now() / 1000 * 3 + bi) > 0;
       if (blink) {
         ctx.fillStyle = '#ff1744';
         ctx.beginPath(); ctx.arc(bx + bw / 2, by - H * 0.05, 3, 0, Math.PI * 2); ctx.fill();

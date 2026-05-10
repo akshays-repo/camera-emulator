@@ -275,6 +275,7 @@ body:has(.camera-shell) {
   position: absolute;
   top: 24px;
   left: 24px;
+  right: 24px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -302,13 +303,12 @@ body:has(.camera-shell) {
 }
 
 .landing-blog-link {
-  position: absolute;
-  right: 24px;
+  margin-left: auto;
   text-decoration: none;
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px;
   letter-spacing: 2px;
-  color: #3a3a3a;
+  color: #888;
   text-transform: uppercase;
   transition: color 0.15s;
 }
